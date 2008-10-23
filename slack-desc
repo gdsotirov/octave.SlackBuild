@@ -1,0 +1,11 @@
+octave: Octave (A high-level language for numerical computations)
+octave:
+octave: GNU Octave is a high-level language, primarily intended for numerical
+octave: computations. It provides a convenient command line interface for
+octave: solving linear and nonlinear problems numerically, and for performing
+octave: other numerical experiments using a language that is mostly
+octave: compatible with Matlab. It may also be used as a batch-oriented
+octave: language.
+octave: Octave was written by John W. Eaton and many others.
+octave:
+octave: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
