@@ -7,5 +7,5 @@ octave: other numerical experiments using a language that is mostly
 octave: compatible with Matlab. It may also be used as a batch-oriented
 octave: language.
 octave: Octave was written by John W. Eaton and many others.
-octave:
+octave: NOTE: This build lacks some sparse functionality.
 octave: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
