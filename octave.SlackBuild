@@ -2,13 +2,14 @@
 #
 # SlackBuild for Octave
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
+# Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
 
 . ../slack-package.conf
 
 NAME=octave
-VERSION=3.2.3
-BUILD=3
+VERSION=3.2.4
+BUILD=${BUILD:-1}
 
 TMP=${TMP:-/tmp}
 CWD=${CWD:-`pwd`}
@@ -32,11 +33,12 @@ mkdir -p $PKG
 
 # Extract the source
 cd $TMP
-tar -jxvf $CWD/$NAME-$VERSION.tar.bz2
+tar -xvf $CWD/$NAME-$VERSION.tar.bz2
 cd $SRC
 fix_source
 
 # Configure
+FFLAGS=$SLKCFLAGS \
 CFLAGS=$SLKCFLAGS \
 CXXFLAGS=$SLKCFLAGS \
 ./configure --build=$ARCH-slackware-linux \
