@@ -19,13 +19,13 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: octave.SlackBuild,v 1.4 2011/02/11 11:28:00 gsotirov Exp $
+# $Id: octave.SlackBuild,v 1.5 2011/06/21 21:39:10 gsotirov Exp $
 #
 
 . ../slack-package.conf
 
 NAME=octave
-VERSION=3.4.0
+VERSION=3.4.1
 BUILD=${BUILD:-1}
 
 TMP=${TMP:-/tmp}
@@ -63,12 +63,14 @@ CXXFLAGS=$SLKCFLAGS \
             --prefix=/usr \
             --mandir=/usr/man \
             --infodir=/usr/info \
+            --docdir=/usr/doc/$NAME-$VERSION \
             --enable-static=no \
             --enable-shared=yes \
-            --enable-readline || exit 1
+            --enable-readline \
+	    --enable-docs || exit 1
 
 # Build
-make || exit 2
+make -j2 || exit 2
 
 # Install
 make DESTDIR=$PKG install || exit 3
@@ -82,10 +84,9 @@ bin_perms $PKG
 install -m 755 -d $PKG/usr/doc/$NAME-$VERSION/html
 install -m 755 -d $PKG/usr/doc/$NAME-$VERSION/html/liboctave
 install -m 755 -d $PKG/usr/doc/$NAME-$VERSION/html/interpreter
-( cd $PKG/usr/doc/$NAME-$VERSION
-  cp -a doc/liboctave/HTML/*   $PKG/usr/doc/$NAME-$VERSION/html/liboctave
-  cp -a doc/interpreter/HTML/* $PKG/usr/doc/$NAME-$VERSION/html/interpreter )
-rm -rf $PKG/usr/doc/$NAME-$VERSION/doc
+( cd $SRC
+  cp -a doc/liboctave/liboctave.html/* $PKG/usr/doc/$NAME-$VERSION/html/liboctave
+  cp -a doc/interpreter/octave.html/* $PKG/usr/doc/$NAME-$VERSION/html/interpreter )
 gzip_man $PKG
 rm -rf $PKG/usr/info/dir
 gzip_info $PKG
