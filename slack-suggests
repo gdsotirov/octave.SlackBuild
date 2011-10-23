@@ -1,2 +1,2 @@
-gnuplot >= 4.2.6
-fltk >= 1.1.10
+gnuplot >= 4.4.3
+fltk >= 1.3.0
