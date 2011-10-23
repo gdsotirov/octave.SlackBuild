@@ -19,13 +19,13 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: octave.SlackBuild,v 1.6 2011/07/24 08:06:34 gsotirov Exp $
+# $Id: octave.SlackBuild,v 1.7 2011/10/23 06:51:19 gsotirov Exp $
 #
 
-. ../slack-package.conf
+. ../../slack-package.conf
 
 NAME=octave
-VERSION=3.4.2
+VERSION=3.4.3
 BUILD=${BUILD:-1}
 
 TMP=${TMP:-/tmp}
@@ -50,7 +50,7 @@ mkdir -p $PKG
 
 # Extract the source
 cd $TMP
-tar -xvf $CWD/$NAME-$VERSION.tar.bz2
+tar -xvf $CWD/$NAME-$VERSION.tar.?z* || exit 3
 cd $SRC
 fix_source
 
@@ -61,19 +61,18 @@ CXXFLAGS=$SLKCFLAGS \
 ./configure --build=$ARCH-slackware-linux \
             --host=$ARCH-slackware-linux \
             --prefix=/usr \
+            --libdir=/usr/lib${LIBDIRSUFFIX} \
             --mandir=/usr/man \
             --infodir=/usr/info \
             --docdir=/usr/doc/$NAME-$VERSION \
             --enable-static=no \
             --enable-shared=yes \
             --enable-readline \
-	    --enable-docs || exit 1
+	    --enable-docs || exit 4
 
-# Build
-make -j2 || exit 2
-
-# Install
-make DESTDIR=$PKG install || exit 3
+# Build & install
+make -j4 || exit 5
+make DESTDIR=$PKG install || exit 6
 
 # Prepare
 ( cd $PKG/usr/share/applications
