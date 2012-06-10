@@ -4,7 +4,7 @@ curl >= 7.21.4
 cxxlibs >= 6.0.14 | gcc-g++ >= 4.5.2
 cyrus-sasl >= 2.1.23
 expat >= 2.0.1
-fftw >= 3.3.1
+fftw >= 3.3.2
 fontconfig >= 2.8.0
 freetype >= 2.4.4
 ftgl >= 2.1.3
