@@ -19,13 +19,13 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: octave.SlackBuild,v 1.11 2014/03/09 20:14:34 gsotirov Exp $
+# $Id: octave.SlackBuild,v 1.12 2014/03/10 20:32:11 gsotirov Exp $
 #
 
 . ../../slack-package.conf
 
 NAME=octave
-VERSION=3.6.4
+VERSION=3.8.1
 BUILD=${BUILD:-1}
 
 TMP=${TMP:-/tmp}
