@@ -29,10 +29,12 @@ if [ -x /usr/bin/install-info ] ; then
   echo_exit $? 6
   install-info --info-dir=/usr/info /usr/info/octave.info-7.gz 2>/dev/null
   echo_exit $? 7
-  install-info --info-dir=/usr/info /usr/info/OctaveFAQ.info.gz 2>/dev/null
+  install-info --info-dir=/usr/info /usr/info/octave.info-8.gz 2>/dev/null
   echo_exit $? 8
-  install-info --info-dir=/usr/info /usr/info/liboctave.info.gz 2>/dev/null
+  install-info --info-dir=/usr/info /usr/info/octave.info-9.gz 2>/dev/null
   echo_exit $? 9
+  install-info --info-dir=/usr/info /usr/info/liboctave.info.gz 2>/dev/null
+  echo_exit $? 10 
   echo_exit $ErrCount "DONE" "FAILURE"
   echo
 else
