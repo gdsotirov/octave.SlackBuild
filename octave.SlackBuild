@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Slackware build script for GNU Octave
-# Copyright (C) 2008-2012,2014 Georgi D. Sotirov <gdsotirov@dir.bg>
+# Copyright (C) 2008-2016 Georgi D. Sotirov <gdsotirov@dir.bg>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -19,13 +19,14 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: octave.SlackBuild,v 1.13 2014/08/16 14:03:40 gsotirov Exp $
+# $Id: octave.SlackBuild,v 1.14 2016/11/07 15:09:42 gsotirov Exp $
 #
 
 . ../../slack-package.conf
 
 NAME=octave
-VERSION=3.8.2
+VERSION=4.0.3
+ARCH=${ARCH:-i586}
 BUILD=${BUILD:-1}
 
 TMP=${TMP:-/tmp}
@@ -71,7 +72,7 @@ CXXFLAGS=$SLKCFLAGS \
 	    --enable-docs || exit 4
 
 # Build & install
-make -j4 || exit 5
+make V=1 -j4 || exit 5
 make DESTDIR=$PKG install || exit 6
 
 # Prepare
