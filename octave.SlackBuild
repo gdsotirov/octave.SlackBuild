@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Slackware build script for GNU Octave
-# Copyright (C) 2008-2017 Georgi D. Sotirov <gdsotirov@dir.bg>
+# Copyright (C) 2008-2018 Georgi D. Sotirov <gdsotirov@dir.bg>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -19,13 +19,13 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: octave.SlackBuild,v 1.16 2017/02/28 11:43:16 gsotirov Exp $
+# $Id: octave.SlackBuild,v 1.17 2018/03/15 17:48:26 gsotirov Exp $
 #
 
 . ../../slack-package.conf
 
 NAME=octave
-VERSION=4.2.1
+VERSION=4.2.2
 ARCH=${ARCH:-i586}
 BUILD=${BUILD:-1}
 
