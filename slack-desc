@@ -8,4 +8,4 @@ octave: compatible with Matlab. It may also be used as a batch-oriented
 octave: language.
 octave: Octave was written by John W. Eaton and many others.
 octave: NOTE: This build lacks some sparse functionality.
-octave: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
+octave: Packaged by Georgi D. Sotirov <gdsotirov@gmail.com>
