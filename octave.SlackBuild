@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Slackware build script for GNU Octave
-# Copyright (C) 2008-2020 Georgi D. Sotirov <gdsotirov@gmail.com>
+# Copyright (C) 2008-2022 Georgi D. Sotirov <gdsotirov@gmail.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@ TMP=${TMP:-/tmp}
 CWD=${CWD:-`pwd`}
 
 if [ ! -e $TMP ]; then
-  mkdir -p $TMP # location to build the source
+  mkdir --parents $TMP # location to build the source
 fi
 
 SRC=$TMP/$NAME-$VERSION
@@ -45,11 +45,11 @@ if [ -e $PKG -a -d $PKG ]; then
   echo "Package creation directory '$PKG' already exists! Please, move it or remove it."
   exit 2
 fi
-mkdir -p $PKG
+mkdir --parents $PKG
 
 # Extract the source
 cd $TMP
-tar -xvf $CWD/$NAME-$VERSION.tar.?z* || exit 3
+tar --extract --verbose --file=$CWD/$NAME-$VERSION.tar.lz || exit 3
 cd $SRC
 fix_source
 
@@ -67,10 +67,10 @@ CXXFLAGS=$SLKCFLAGS \
             --enable-static=no \
             --enable-shared=yes \
             --enable-readline \
-	    --enable-docs || exit 4
+            --enable-docs || exit 4
 
 # Build & install
-make V=1 -j4 || exit 5
+make V=1 --jobs 4 || exit 5
 make DESTDIR=$PKG install || exit 6
 
 # Prepare
@@ -79,9 +79,9 @@ make DESTDIR=$PKG install || exit 6
 bin_perms $PKG
 ( cd $PKG; strip_bin; strip_lib )
 ( cd $SRC; create_docs $PKG $NAME-$VERSION )
-install -m 755 -d $PKG/usr/doc/$NAME-$VERSION/html
-install -m 755 -d $PKG/usr/doc/$NAME-$VERSION/html/liboctave
-install -m 755 -d $PKG/usr/doc/$NAME-$VERSION/html/interpreter
+install --mode 755 --directory $PKG/usr/doc/$NAME-$VERSION/html
+install --mode 755 --directory $PKG/usr/doc/$NAME-$VERSION/html/liboctave
+install --mode 755 --directory $PKG/usr/doc/$NAME-$VERSION/html/interpreter
 ( cd $SRC
   cp -a doc/liboctave/liboctave.html/* $PKG/usr/doc/$NAME-$VERSION/html/liboctave
   cp -a doc/interpreter/octave.html/* $PKG/usr/doc/$NAME-$VERSION/html/interpreter )
@@ -89,28 +89,27 @@ gzip_man $PKG
 rm -rf $PKG/usr/info/dir
 gzip_info $PKG
 
-install -m 755 -d $PKG/install
-install -m 644 $CWD/doinst.sh      $PKG/install/doinst.sh
-install -m 644 $CWD/slack-desc     $PKG/install/slack-desc
-install -m 644 $CWD/slack-required $PKG/install/slack-required
-install -m 644 $CWD/slack-suggests $PKG/install/slack-suggests
+install --mode 755 --directory $PKG/install
+install --mode 644 $CWD/doinst.sh      $PKG/install/doinst.sh
+install --mode 644 $CWD/slack-desc     $PKG/install/slack-desc
+install --mode 644 $CWD/slack-required $PKG/install/slack-required
+install --mode 644 $CWD/slack-suggests $PKG/install/slack-suggests
 
-install -m 755 -d $PKG/usr/src/slackbuilds/$NAME-$VERSION
-install -m 644 $CWD/slack-desc       $PKG/usr/src/slackbuilds/$NAME-$VERSION/slack-desc
-install -m 644 $CWD/slack-required   $PKG/usr/src/slackbuilds/$NAME-$VERSION/slack-required
-install -m 644 $CWD/slack-suggests   $PKG/usr/src/slackbuilds/$NAME-$VERSION/slack-suggests
-install -m 644 $CWD/doinst.sh        $PKG/usr/src/slackbuilds/$NAME-$VERSION/doinst.sh
-install -m 644 $CWD/$NAME.SlackBuild $PKG/usr/src/slackbuilds/$NAME-$VERSION/$NAME.SlackBuild
+install --mode 755 --directory $PKG/usr/src/slackbuilds/$NAME-$VERSION
+install --mode 644 $CWD/slack-desc       $PKG/usr/src/slackbuilds/$NAME-$VERSION/slack-desc
+install --mode 644 $CWD/slack-required   $PKG/usr/src/slackbuilds/$NAME-$VERSION/slack-required
+install --mode 644 $CWD/slack-suggests   $PKG/usr/src/slackbuilds/$NAME-$VERSION/slack-suggests
+install --mode 644 $CWD/doinst.sh        $PKG/usr/src/slackbuilds/$NAME-$VERSION/doinst.sh
+install --mode 644 $CWD/$NAME.SlackBuild $PKG/usr/src/slackbuilds/$NAME-$VERSION/$NAME.SlackBuild
 
 cd $PKG
-PKGNAME=$NAME-$VERSION-$ARCH-$BUILD$MYIN
-makepkg -l y -c n $PKG_DIR/$PKGNAME.txz
-cd $PKG_DIR
-md5sum $PKGNAME.txz > $PKGNAME.txz.md5
-cat $PKG/install/slack-desc > $PKG_DIR/$PKGNAME.txt
+PKGNAME=${NAME}-${VERSION}_${VER_BLD}-${ARCH}-${BUILD}${MYIN}
+makepkg --chown n --linkadd y $PKG_DIR/${PKGNAME}.txz
+md5sum $PKG_DIR/${PKGNAME}.txz > $PKG_DIR/${PKGNAME}.txz.md5
+cat $PKG/install/slack-desc > $PKG_DIR/${PKGNAME}.txt
 
 if [ "$1" == "--cleanup" ]; then
-  rm -r $SRC
-  rm -r $PKG
+  rm --recursive $SRC
+  rm --recursive $PKG
 fi
 
