@@ -23,7 +23,7 @@
 . ../../slack-package.conf
 
 NAME=octave
-VERSION=4.2.2
+VERSION=7.1.0
 ARCH=${ARCH:-i586}
 BUILD=${BUILD:-1}
 
@@ -57,8 +57,8 @@ fix_source
 FFLAGS=$SLKCFLAGS \
 CFLAGS=$SLKCFLAGS \
 CXXFLAGS=$SLKCFLAGS \
-./configure --build=$ARCH-slackware-linux \
-            --host=$ARCH-slackware-linux \
+./configure --build="$ARCH-slackware-linux" \
+            --host="$ARCH-slackware-linux" \
             --prefix=/usr \
             --libdir=/usr/lib${LIBDIRSUFFIX} \
             --mandir=/usr/man \
@@ -70,12 +70,10 @@ CXXFLAGS=$SLKCFLAGS \
             --enable-docs || exit 4
 
 # Build & install
-make V=1 --jobs 4 || exit 5
+make V=1 --jobs 8 || exit 5
 make DESTDIR=$PKG install || exit 6
 
 # Prepare
-( cd $PKG/usr/share/applications
-  mv www.octave.org-octave.desktop $NAME.desktop )
 bin_perms $PKG
 ( cd $PKG; strip_bin; strip_lib )
 ( cd $SRC; create_docs $PKG $NAME-$VERSION )
