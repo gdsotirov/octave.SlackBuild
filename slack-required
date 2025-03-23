@@ -1,8 +1,6 @@
-QScintilla >= 2.11.6
 aaa_glibc-solibs >= 2.33
 alsa-lib >= 1.2.5.1
 arpack >= 2.1
-blas >= 3.10.0
 brotli >= 1.0.9
 bzip2 >= 1.0.8
 c-ares >= 1.18.1
@@ -32,7 +30,7 @@ icu4c >= 69.1
 jack >= 1.9.21
 keyutils >= 1.6.3
 krb5 >= 1.19.2
-lapack >= 3.10.1
+lapack >= 3.12.1
 lcms2 >= 2.13
 libICE >= 1.0.10
 libSM >= 1.2.3
